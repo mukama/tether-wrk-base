@@ -29,6 +29,10 @@ test('rpc public key and client key test', async function (t) {
   }
 })
 
+test('store dir is private to the worker user', async function (t) {
+  t.is(fs.statSync(path.dirname(wrk.store_s0.opts.storeDir)).mode & 0o777, 0o700)
+})
+
 test('instance id test', async function (t) {
   const statusPath = path.join(wrk.ctx.root, 'status', `${wrk.prefix}.json`)
   const uuidRegex = /^tether-wrk-base-[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/

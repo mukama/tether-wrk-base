@@ -132,6 +132,9 @@ class TetherWrkBase extends WrkBase {
       async () => {
         this.logger = this.logging_l0.logger
 
+        // store holds the DHT/RPC identity seeds in plaintext
+        await fs.chmod(path.dirname(this.store_s0.opts.storeDir), 0o700)
+
         await this._startRpcServer()
         const rpcServer = this.net_r0.rpcServer
 
